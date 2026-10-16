@@ -1,0 +1,6 @@
+{
+    "disk_warning": 80,
+    "disk_critical": 90,
+    "memory_warning": 80,
+    "memory_critical": 90
+}

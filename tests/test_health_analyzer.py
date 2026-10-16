@@ -43,6 +43,16 @@ class TestAssessHealth(unittest.TestCase):
         self.assertEqual(findings[0]["severity"], "WARNING")
         self.assertIn("Memory usage", findings[0]["issue"])
 
+    def test_memory_critical(self):
+        memory = {"usage_percent": 95.0}
+        disk = {"usage_percent": 40.0}
+        services = {"available": True, "services": []}
+
+        findings = assess_health(memory, disk, services)
+
+        self.assertEqual(findings[0]["severity"], "CRITICAL")
+        self.assertIn("Memory usage", findings[0]["issue"])
+
     def test_failed_services(self):
         memory = {"usage_percent": 40.0}
         disk = {"usage_percent": 40.0}

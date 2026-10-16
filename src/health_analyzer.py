@@ -12,11 +12,16 @@ from pathlib import Path
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 REPORT_DIR = PROJECT_DIR / "reports"
 
-# Alert thresholds
-DISK_WARNING = 80
-DISK_CRITICAL = 90
-MEMORY_WARNING = 80
-MEMORY_CRITICAL = 90
+# Load alert thresholds from configuration
+CONFIG_FILE = PROJECT_DIR / "config.json"
+
+with open(CONFIG_FILE, "r", encoding="utf-8") as config_file:
+    CONFIG = json.load(config_file)
+
+DISK_WARNING = CONFIG["disk_warning"]
+DISK_CRITICAL = CONFIG["disk_critical"]
+MEMORY_WARNING = CONFIG["memory_warning"]
+MEMORY_CRITICAL = CONFIG["memory_critical"]
 
 
 def run_command(command):
